@@ -1,9 +1,4 @@
 
-const elList = document.querySelector('.todo__list');
-const elAddButton = document.querySelector('.button_add');
-const elInput = document.querySelector('.input');
-const elTemplate = document.querySelector('.template');
-
 const TODO_LIST = [
     { title: 'Съесть печеньку 🍪' },
     { title: 'Изучить React ⚛️' },
@@ -12,5 +7,23 @@ const TODO_LIST = [
     { title: 'Погулять в парке 🌳' },
 ];
 
+const listContainerElement = document.querySelector('.todo__list');
 
-//делаю коммит
+function renderList() {
+    let newHTML = '';
+
+    newHTML = TODO_LIST.map(function (item) {
+        return `<li class="todo__item card">
+        <h2 class="card__title">${item.title}</h2>
+        <div class="card__actions">
+          <button type="button" class="button button_duplicate"></button>
+          <button type="button" class="button button_remove"></button>
+        </div>
+      </li>`
+    }).join('');
+
+    console.log(newHTML)
+    listContainerElement.insertAdjacentHTML('afterbegin', newHTML);
+}
+renderList();
+
