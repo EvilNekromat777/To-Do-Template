@@ -1,13 +1,17 @@
 
 const TODO_LIST = [
-    { title: 'Съесть печеньку 🍪' },
+    // { title: 'Съесть печеньку 🍪' },
     { title: 'Изучить React ⚛️' },
-    { title: 'Полить цветы 🌸' },
+    { title: 'Полить цветы 🌷' },
     { title: 'Сделать свой сайт 👨‍💻' },
     { title: 'Погулять в парке 🌳' },
+    { title: 'Позвонить маме 📞' },
+    // { title: 'Помыть машину 🚗' },
+    // { title: 'Встретиться с друзьями 👋' },
 ];
 
 const listContainerElement = document.querySelector('.todo__list');
+const inputElement = document.querySelector('input');
 
 function renderList() {
     let newHTML = '';
@@ -27,5 +31,18 @@ function composeItemHTML(item){
             </li>`
 }
 
-renderList();
+function bindAddItemListener(){
+    const addButtonElement = document.querySelector('.button_add');
+    addButtonElement.addEventListener('click', addNewItem)
+}
 
+function addNewItem(){
+    const inputText = inputElement.value;
+    const newItemHTML = composeItemHTML({ title: inputText});
+    listContainerElement.insertAdjacentHTML('afterbegin', newItemHTML);
+}
+
+
+
+renderList();
+bindAddItemListener();
