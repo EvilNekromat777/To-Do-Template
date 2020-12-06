@@ -23,6 +23,8 @@ function composeItem(item){
     const newItem = templateElement.content.cloneNode(true);
     const headerElement = newItem.querySelector('.card__title');
     headerElement.textContent = item.title;
+    const removeButton = newItem.querySelector('.button_remove');
+    removeButton.addEventListener('click', removeItem)
     return newItem;
 }
 
@@ -34,8 +36,14 @@ function bindAddItemListener(){
 
 function addNewItem(){
     const inputText = inputElement.value;
-    const newItemHTML = composeItem({ title: inputText});
-    listContainerElement.prepend(newItemHTML);
+    const newItem = composeItem({ title: inputText});
+    listContainerElement.prepend(newItem);
+}
+
+function removeItem(e){
+const targetElement = e.target;
+const targetItem = targetElement.closest('.card');
+targetItem.remove();
 }
 
 renderList();
