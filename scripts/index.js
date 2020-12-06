@@ -53,7 +53,8 @@ const targetItem = evt.target.closest('.card');
 const headerElement = targetItem.querySelector('.card__title');
 const title = headerElement.textContent;
 const newItem = composeItem({ title: title })
-listContainerElement.prepend(newItem);
+// listContainerElement.prepend(newItem);
+targetItem.after(newItem);
 }
 
 renderList();
