@@ -1,6 +1,5 @@
 
 const TODO_LIST = [
-    // { title: 'Съесть печеньку 🍪' },
     { title: 'Изучить React ⚛️' },
     { title: 'Полить цветы 🌷' },
     { title: 'Сделать свой сайт 👨‍💻' },
@@ -8,28 +7,25 @@ const TODO_LIST = [
     { title: 'Позвонить маме 📞' },
     // { title: 'Помыть машину 🚗' },
     // { title: 'Встретиться с друзьями 👋' },
+    // { title: 'Съесть печеньку 🍪' },
 ];
 
 const listContainerElement = document.querySelector('.todo__list');
 const inputElement = document.querySelector('input');
+const templateElement = document.querySelector('.template');
 
 function renderList() {
-    let newHTML = '';
-
-    newHTML = TODO_LIST.map(composeItemHTML).join('');
-
-    listContainerElement.insertAdjacentHTML('afterbegin', newHTML);
+    const listItems = TODO_LIST.map(composeItem);
+    listContainerElement.append(...listItems);
 }
 
-function composeItemHTML(item){
-    return `<li class="todo__item card">
-                <h2 class="card__title">${item.title}</h2>
-                <div class="card__actions">
-                    <button type="button" class="button button_duplicate"></button>
-                    <button type="button" class="button button_remove"></button>
-                </div>
-            </li>`
+function composeItem(item){
+    const newItem = templateElement.content.cloneNode(true);
+    const headerElement = newItem.querySelector('.card__title');
+    headerElement.textContent = item.title;
+    return newItem;
 }
+
 
 function bindAddItemListener(){
     const addButtonElement = document.querySelector('.button_add');
@@ -41,8 +37,6 @@ function addNewItem(){
     const newItemHTML = composeItemHTML({ title: inputText});
     listContainerElement.insertAdjacentHTML('afterbegin', newItemHTML);
 }
-
-
 
 renderList();
 bindAddItemListener();
