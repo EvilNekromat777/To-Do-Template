@@ -38,6 +38,7 @@ function addNewItem(){
     const inputText = inputElement.value;
     const newItem = composeItem({ title: inputText});
     listContainerElement.prepend(newItem);
+    inputElement.value = '';
 }
 
 function removeItem(e){
