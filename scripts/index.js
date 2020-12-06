@@ -24,7 +24,9 @@ function composeItem(item){
     const headerElement = newItem.querySelector('.card__title');
     headerElement.textContent = item.title;
     const removeButton = newItem.querySelector('.button_remove');
-    removeButton.addEventListener('click', removeItem)
+    removeButton.addEventListener('click', removeItem);
+    const duplicateButton = newItem.querySelector('.button_duplicate'); 
+    duplicateButton.addEventListener('click', duplicateItem);
     return newItem;
 }
 
@@ -41,10 +43,17 @@ function addNewItem(){
     inputElement.value = '';
 }
 
-function removeItem(e){
-const targetElement = e.target;
-const targetItem = targetElement.closest('.card');
+function removeItem(evt){
+const targetItem = evt.target.closest('.card');
 targetItem.remove();
+}
+
+function duplicateItem(evt){
+const targetItem = evt.target.closest('.card');
+const headerElement = targetItem.querySelector('.card__title');
+const title = headerElement.textContent;
+const newItem = composeItem({ title: title })
+listContainerElement.prepend(newItem);
 }
 
 renderList();
