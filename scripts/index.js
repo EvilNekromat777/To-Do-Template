@@ -34,8 +34,8 @@ function bindAddItemListener(){
 
 function addNewItem(){
     const inputText = inputElement.value;
-    const newItemHTML = composeItemHTML({ title: inputText});
-    listContainerElement.insertAdjacentHTML('afterbegin', newItemHTML);
+    const newItemHTML = composeItem({ title: inputText});
+    listContainerElement.prepend(newItemHTML);
 }
 
 renderList();
